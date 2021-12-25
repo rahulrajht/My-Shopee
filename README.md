@@ -1,2 +1,1 @@
-# My-Shopee
-### E-commerce Application
+"# My-Shopee" 
