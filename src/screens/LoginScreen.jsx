@@ -5,33 +5,35 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-// import "../styles/form.css"
+import { login } from '../actions/userActions'
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const error = false;
-  const loading = false;
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // const userLogin = useSelector((state) => state.userLogin)
-  // const { loading, error, userInfo } = userLogin
-  const userInfo = false;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+  
   const redirect = location.search ? location.search.split('=')[1] : '/'
-  console.log("redirect" , redirect)
-  console.log("location" , location)
+
    useEffect(() => {
     if (userInfo) {
       history.push(redirect)
     }
   }, [history, userInfo, redirect])
 
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(login(email, password))
+  }
+
   return (
     <FormContainer>
       <h1 className='mt-5'>Sign In</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
-      <Form  className='mt-4'>
+      <Form  onSubmit={submitHandler} className='mt-4'>
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control 
@@ -54,7 +56,7 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button  className='mt-3 px-4' type='submit' variant='secondary'>
+        <Button  className='mt-3 px-4' type='submit' variant='primary'>
           Sign In
         </Button>
       </Form>
