@@ -10,8 +10,8 @@ module.exports = {
                 use: "svg-inline-loader",
             },
             {
-                test: /\.css$/i,
-                use: ["style-loader" , "css-loader"],
+                test: /\.(css|scss)$/i,
+                use: ["style-loader" , "css-loader" ,"sass-loader"],
             },
             {
                 test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,

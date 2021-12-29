@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import "../styles/form.css"
+// import "../styles/form.css"
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('')
@@ -16,9 +16,15 @@ const LoginScreen = ({ location, history }) => {
 
   // const userLogin = useSelector((state) => state.userLogin)
   // const { loading, error, userInfo } = userLogin
-
-   const redirect = location.search ? location.search.split('=')[1] : '/'
-
+  const userInfo = false;
+  const redirect = location.search ? location.search.split('=')[1] : '/'
+  console.log("redirect" , redirect)
+  console.log("location" , location)
+   useEffect(() => {
+    if (userInfo) {
+      history.push(redirect)
+    }
+  }, [history, userInfo, redirect])
 
   return (
     <FormContainer>
@@ -56,7 +62,7 @@ const LoginScreen = ({ location, history }) => {
       <Row className='py-3'>
         <Col>
           New Customer?
-          <Link className='link-btn' to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+          <Link className='ms-2 link-btn' to={redirect ? `/register?redirect=${redirect}` : '/register'}>
             Register
           </Link>
         </Col>

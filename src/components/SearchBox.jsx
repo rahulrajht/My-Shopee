@@ -13,7 +13,7 @@ const SearchBox = ({ history }) => {
   }
 
   return (
-    <Form onSubmit={submitHandler} inline className='d-flex form ms-lg-5 mw-75 mt-2'>
+    <Form onSubmit={submitHandler} inline className='d-flex ms-lg-5 mw-75 mt-2'>
       <Form.Control
         type='text'
         name='q'

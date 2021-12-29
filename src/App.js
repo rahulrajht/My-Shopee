@@ -4,6 +4,7 @@ import { BrowserRouter as Router , Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
 function App() {
     return (
         <>
@@ -13,6 +14,8 @@ function App() {
                 <Container>
                     <Route  exact path="/login" component={LoginScreen} />
                     <Route  exact path="/" component={HomeScreen}/>
+                    <Route  exact path="/register" component={RegisterScreen}/>
+
                 </Container>
 
             </main>
