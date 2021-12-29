@@ -6,9 +6,18 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart ,faUser } from '@fortawesome/free-solid-svg-icons'
+import { logout } from '../actions/userActions'
+
 const Header = () => {
 
-  const userInfo = false
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
   
   return (
     <header>
@@ -32,7 +41,7 @@ const Header = () => {
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item >
+                  <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
