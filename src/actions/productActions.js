@@ -25,14 +25,14 @@ import {
   PRODUCT_TOP_FAIL,
 } from '../constants/productConstants'
 
-export const listProducts = (keyword = '', pageNumber = '') => async (
+export const listProducts = (keyword = '') => async (
   dispatch
 ) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
     const { data } = await axios.get(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products?keyword=${keyword}`
     )
 
     dispatch({
@@ -53,9 +53,8 @@ export const listProducts = (keyword = '', pageNumber = '') => async (
 export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST })
-
     const { data } = await axios.get(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/${id}`)
-
+    
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data,
