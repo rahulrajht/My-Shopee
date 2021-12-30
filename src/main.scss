@@ -43,7 +43,21 @@ $danger:        $red;
 $light:         $gray-300;
 $dark:          $gray-900;
 
-
+.crs{
+    display: block;
+    height: 450px;
+    width: 75%;
+    margin: 0 auto;
+}
+.crs-img{
+    display: block;
+    width: 300px;
+    height: 250px;
+    margin: 50px auto;
+}
+h4{
+    color: $gray-100;
+}
 .link-btn{
     margin-left: 10px ;
     color: black;
@@ -58,4 +72,18 @@ $dark:          $gray-900;
     background-color: $gray-500;
     border-color: black;
 }
+@media (max-width:600px) {
+    .crs{
+        height: 350px;
+        width: 100%;
+    }
+    .crs-img{
+        width: 200px;
+        height: 150px;
+    }
+    h4{
+        padding: 0 0.5rem
+    }
+}
+
 @import "~bootstrap/scss/bootstrap";
