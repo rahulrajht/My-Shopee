@@ -196,7 +196,7 @@ const ProductScreen = ({ history, match }) => {
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to ={{pathname: '/login', state: { from:location.pathname }}}>sign in</Link> to write a review{' '}
+                      Please <Link to ={`/login?redirect=/product/${match.params.id}`}>sign in</Link> to write a review{' '}
                     </Message>
                   )}
                 </ListGroup.Item>
