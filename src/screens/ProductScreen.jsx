@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form, ToastContainer } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { addToCart, getCartItems, removeFromCart } from '../actions/cartActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,12 +16,12 @@ const CartScreen = ({ match, location, history }) => {
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   useEffect(() => {
-    if (productId) {
-      dispatch(addToCart(productId, qty))
-    }
-  }, [dispatch, productId, qty])
+      dispatch(getCartItems( userInfo._id))    
+  }, [dispatch, userInfo._id])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
