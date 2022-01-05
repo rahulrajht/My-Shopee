@@ -10,7 +10,7 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
 } from './reducers/productReducers'
-import { cartReducer } from './reducers/cartReducers'
+import { cartReducer , cartStateReducer } from './reducers/cartReducers'
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -38,6 +38,7 @@ const reducer = combineReducers({
   productReviewCreate: productReviewCreateReducer,
   productTopRated: productTopRatedReducer,
   cart: cartReducer,
+  cartState:cartStateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -51,6 +52,7 @@ const reducer = combineReducers({
   orderDeliver: orderDeliverReducer,
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
+
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -64,6 +66,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
   : {}
+
 
 const initialState = {
   cart: {
@@ -79,6 +82,7 @@ const store = createStore(
   reducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
+  
 )
 
 export default store

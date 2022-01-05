@@ -27,6 +27,7 @@ import {
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+import { getCartItems } from './cartActions';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -45,13 +46,14 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     )
-
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
     })
+    dispatch(getCartItems(data._id))
 
     localStorage.setItem('userInfo', JSON.stringify(data))
+    
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
