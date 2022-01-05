@@ -13,6 +13,7 @@ import {
 } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 import { addToCart } from '../actions/cartActions'
+import { checkItemInCart } from '../utils/checkItemInCart'
 
 const ProductScreen = ({ history, match }) => {
   toast.configure();
@@ -34,7 +35,9 @@ const ProductScreen = ({ history, match }) => {
   } = productReviewCreate
 
   const cartState = useSelector((state) => state.cartState)
-  const isLoading = cartState
+
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
 
   useEffect(() => {
     if (successProductReview) {
@@ -65,7 +68,12 @@ const ProductScreen = ({ history, match }) => {
   }, [cartState.loading])
 
   const addToCartHandler = () => {
-    dispatch(addToCart(match.params.id, qty, userInfo._id))
+    const pid = match.params.id;
+    if(!checkItemInCart(cartItems,pid)){
+      dispatch(addToCart(match.params.id, qty, userInfo._id))
+    }else{
+      toast.warning("Item already present in your cart")
+    }
   }
 
   const submitHandler = (e) => {
