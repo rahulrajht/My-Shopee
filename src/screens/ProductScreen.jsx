@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Link ,useLocation} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
+import { Link, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import { Row, Col, Image, ListGroup, Card, Button, Form, ToastContainer } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
+import { toast } from "react-toastify";
 import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import { addToCart } from '../actions/cartActions'
 
 const ProductScreen = ({ history, match }) => {
+  toast.configure();
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
@@ -21,15 +24,17 @@ const ProductScreen = ({ history, match }) => {
 
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
-  const location = useLocation()
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
 
+  const { userInfo } = userLogin
   const productReviewCreate = useSelector((state) => state.productReviewCreate)
   const {
     success: successProductReview,
     error: errorProductReview,
   } = productReviewCreate
+
+  const cartState = useSelector((state) => state.cartState)
+  const isLoading = cartState
 
   useEffect(() => {
     if (successProductReview) {
@@ -41,8 +46,26 @@ const ProductScreen = ({ history, match }) => {
     dispatch(listProductDetails(match.params.id))
   }, [dispatch, match, successProductReview])
 
+  useEffect(() => {
+    if (cartState.loading === false) {
+      toast.success('Item added to cart!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
+
+      setTimeout(() => {
+        history.push('/cart')
+      }, 2000)
+    }
+  }, [cartState.loading])
+
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
+    dispatch(addToCart(match.params.id, qty, userInfo._id))
   }
 
   const submitHandler = (e) => {
@@ -57,6 +80,7 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
+    <ToastContainer/>
       <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
@@ -196,7 +220,7 @@ const ProductScreen = ({ history, match }) => {
                     </Form>
                   ) : (
                     <Message>
-                      Please <Link to ={`/login?redirect=/product/${match.params.id}`}>sign in</Link> to write a review{' '}
+                      Please <Link to={`/login?redirect=/product/${match.params.id}`}>sign in</Link> to write a review{' '}
                     </Message>
                   )}
                 </ListGroup.Item>
