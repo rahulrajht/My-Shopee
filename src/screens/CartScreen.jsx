@@ -1,30 +1,27 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
+import { Row, Col, ListGroup, Image, Form, Button, Card, ButtonGroup } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, getCartItems, removeFromCart } from '../actions/cartActions'
+import { addToCart, getCartItems, removeFromCart,quantityChange } from '../actions/cartActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const CartScreen = ({ match, location, history }) => {
-  const productId = match.params.id
-
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
   const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
-
+  const userInfo  = userLogin.userInfo ? userLogin.userInfo : ""
+  const userid = userInfo ? userInfo._id : ""
   useEffect(() => {
-      dispatch(getCartItems( userInfo._id))    
-  }, [dispatch, userInfo._id])
+      dispatch(getCartItems(userid))    
+  }, [])
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
+  const removeFromCartHandler = (userId,productId) => {
+    dispatch(removeFromCart(userId,productId))
   }
 
   const checkoutHandler = () => {
@@ -52,27 +49,17 @@ const CartScreen = ({ match, location, history }) => {
                   </Col>
                   <Col md={2}>${item.price}</Col>
                   <Col md={2}>
-                    <Form.Control
-                      as='select'
-                      value={item.qty}
-                      onChange={(e) =>
-                        dispatch(
-                          addToCart(item.product, Number(e.target.value))
-                        )
-                      }
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
+                   <ButtonGroup>
+                      <Button className='mx-2' onClick={()=> dispatch(quantityChange(userid,item._id,1,item.qty))}> + </Button>
+                            {item.qty}
+                      <Button className='mx-2' onClick={()=> dispatch(quantityChange(userid,item._id,-1,item.qty))}> -</Button> 
+                      </ButtonGroup>
                   </Col>
                   <Col md={2}>
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(userid,item._id)}
                     >
                       <FontAwesomeIcon icon={faTrash}/>
                     </Button>

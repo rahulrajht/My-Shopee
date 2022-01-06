@@ -34,13 +34,18 @@ export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
  
 }
 
-export const removeFromCart = (id) => (dispatch, getState) => {
+export const removeFromCart = (userId,productId) => async(dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,
-    payload: id,
+    payload: productId,
   })
-
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/delete` ,{userId,productId} ,config)
+  // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
 export const saveShippingAddress = (data) => (dispatch) => {
@@ -72,4 +77,27 @@ export const getCartItems = (userId) => async (dispatch) =>{
     type: INIT_CART_ITEM,
     payload: data
   })
+}
+
+export const quantityChange = (userId , productId,value,qty) => async(dispatch) =>{
+  if(qty ===1 && value === -1){
+    dispatch({
+      type: CART_REMOVE_ITEM,
+      payload: productId,
+    })
+  }
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+  const res = await axios.put('https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/qtyChange',{userId,productId,value,qty},config)
+  if(res.status === 201){
+    const data = res.data;
+    dispatch({
+      type:INIT_CART_ITEM,
+      payload:data
+    })
+  }
 }
