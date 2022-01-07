@@ -2,10 +2,10 @@ import React from 'react'
 import { Route , Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
 import SearchBox from './SearchBox'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart ,faUser } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faShoppingCart ,faUser } from '@fortawesome/free-solid-svg-icons'
 import { logout } from '../actions/userActions'
 
 const Header = () => {
@@ -18,7 +18,6 @@ const Header = () => {
   const logoutHandler = () => {
     dispatch(logout())
   }
-  
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
@@ -33,7 +32,12 @@ const Header = () => {
             <Nav className=''>
               <LinkContainer to='/cart' className='ml-5'>
                 <Nav.Link>
-                <FontAwesomeIcon icon={faShoppingCart} /> Cart
+                <FontAwesomeIcon icon={faShoppingCart} />
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to='/wishlist' className='ml-5'>
+                <Nav.Link>
+                <FontAwesomeIcon icon={faHeart} />
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
