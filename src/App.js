@@ -29,6 +29,7 @@ function App() {
                     <Route exact path='/shipping' component={ShippingScreen} />
                     <Route path='/payment' component={PaymentScreen} />
                     <Route path='/placeorder' component={PlaceOrderScreen} />
+                    <Route path='/search/:keyword' component={HomeScreen} exact />
                 </Container>
             </main>
         </Router>
