@@ -25,16 +25,18 @@ import {
   PRODUCT_TOP_FAIL,
 } from '../constants/productConstants'
 
-export const listProducts = (keyword = '') => async (
-  dispatch
-) => {
+export const listProducts = (keyword = '') => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST })
 
     const { data } = await axios.get(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products?keyword=${keyword}`
+      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products?keyword=${keyword}`,config
     )
-
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
       payload: data,
