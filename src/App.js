@@ -12,6 +12,7 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './components/Footer'
 function App() {
     return (
         <>
@@ -32,8 +33,9 @@ function App() {
                     <Route path='/search/:keyword' component={HomeScreen} exact />
                 </Container>
             </main>
+            <Footer/>
         </Router>
-    
+        
         </>
     )
 }
