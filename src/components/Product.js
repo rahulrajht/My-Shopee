@@ -5,7 +5,7 @@ import Rating from "./Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishList } from "../actions/wishListAction";
+import { addToWishList, removeFromWishList } from "../actions/wishListAction";
 import { toast } from "react-toastify";
 import { checkItemInWishList } from "../utils/checkItemInWishList";
 const Product = ({ product }) => {
@@ -15,7 +15,16 @@ const Product = ({ product }) => {
   const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
   const userid = userInfo ? userInfo._id : "";
   const wishlist = JSON.parse(localStorage.getItem("wishlist"))
-  const color = checkItemInWishList(wishlist,product._id) ?"red":"limegreen"
+
+
+
+  function action(id,userid){
+    if(color==="red"){
+      dispatch(removeFromWishList(userid,id))
+    }else{
+      dispatch(addToWishList(product._id, userid))
+    }
+  }
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>
@@ -38,7 +47,7 @@ const Product = ({ product }) => {
 
         <Card.Text as="h3">${product.price}</Card.Text>
         <div
-          onClick={() => dispatch(addToWishList(product._id, userid))}
+          onClick={() => action(product._id, userid)}
           className="d-flex justify-content-end m-2 wishicon"
         >
           <FontAwesomeIcon
