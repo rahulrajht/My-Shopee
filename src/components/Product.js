@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import Rating from "./Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from 'react-redux'
-import {addToWishList} from '../actions/wishListAction'
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishList } from "../actions/wishListAction";
 import { toast } from "react-toastify";
+import { checkItemInWishList } from "../utils/checkItemInWishList";
 const Product = ({ product }) => {
-  toast.configure()
-  const dispatch = useDispatch()
-  const userLogin = useSelector((state) => state.userLogin)
-  const userInfo  = userLogin.userInfo ? userLogin.userInfo : ""
-  const userid = userInfo ? userInfo._id : ""
-
-  
-
+  toast.configure();
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
+  const userid = userInfo ? userInfo._id : "";
+  const wishlist = JSON.parse(localStorage.getItem("wishlist"))
+  const color = checkItemInWishList(wishlist,product._id) ?"red":"limegreen"
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>
@@ -37,17 +37,17 @@ const Product = ({ product }) => {
         </Card.Text>
 
         <Card.Text as="h3">${product.price}</Card.Text>
-        <Card.ImgOverlay
-          onClick={()=> dispatch(addToWishList(product._id,userid))}
-          className="d-flex justify-content-end m-2"
+        <div
+          onClick={() => dispatch(addToWishList(product._id, userid))}
+          className="d-flex justify-content-end m-2 wishicon"
         >
           <FontAwesomeIcon
             cursor={"pointer"}
             size="lg"
             icon={faHeart}
-            color="LimeGreen"
+            color={color}
           />
-        </Card.ImgOverlay>
+        </div>
       </Card.Body>
     </Card>
   );

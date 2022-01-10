@@ -28,6 +28,7 @@ import {
 } from '../constants/userConstants'
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 import { getCartItems } from './cartActions';
+import { getWishListItems } from './wishListAction';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -51,7 +52,7 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     })
     dispatch(getCartItems(data._id))
-
+    dispatch(getWishListItems(data._id))
     localStorage.setItem('userInfo', JSON.stringify(data))
     
   } catch (error) {
