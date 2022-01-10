@@ -28,7 +28,7 @@ import {
   orderListMyReducer,
   orderListReducer,
 } from './reducers/orderReducers'
-
+import { wishListReducer,wishListStateReducer } from './reducers/wishListReducer'
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -39,6 +39,8 @@ const reducer = combineReducers({
   productTopRated: productTopRatedReducer,
   cart: cartReducer,
   cartState:cartStateReducer,
+  wishList:wishListReducer,
+  wishListState:wishListStateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,

@@ -35,7 +35,6 @@ const ProductScreen = ({ history, match }) => {
   } = productReviewCreate
 
   const cartState = useSelector((state) => state.cartState)
-
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
@@ -66,6 +65,8 @@ const ProductScreen = ({ history, match }) => {
       }, 2000)
     }
   }, [cartState.loading])
+
+  
 
   const addToCartHandler = () => {
     const pid = match.params.id;
