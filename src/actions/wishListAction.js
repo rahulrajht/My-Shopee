@@ -58,4 +58,5 @@ export const getWishListItems = (userId) => async (dispatch) =>{
     type: INIT_WISHLIST_ITEM,
     payload: data
   })
+  localStorage.setItem('wishlist',JSON.stringify(data))
 }
