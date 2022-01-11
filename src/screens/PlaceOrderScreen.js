@@ -9,8 +9,8 @@ import { createOrder } from '../actions/orderActions'
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart)
-
+  const cart = useSelector((state) => state.cart) 
+  const cartItems = cart.cartItems === [] ? JSON.parse(localStorage.getItem('cartItems')): cart.cartItems
   //   Calculate prices
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
@@ -33,9 +33,13 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`)
+    } 
+    if(cart.paymentMethod === undefined){
+      history.push('/payment')
     }
     // eslint-disable-next-line
   }, [history, success])
+
 
   const placeOrderHandler = () => {
     dispatch(
@@ -60,7 +64,7 @@ const PlaceOrderScreen = ({ history }) => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                <strong>Address:</strong>
+                <strong>Address: </strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
                 {cart.shippingAddress.postalCode},{' '}
                 {cart.shippingAddress.country}
@@ -75,11 +79,11 @@ const PlaceOrderScreen = ({ history }) => {
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.length === 0 ? (
+              {cartItems === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
                 <ListGroup variant='flush'>
-                  {cart.cartItems.map((item, index) => (
+                  {cartItems.map((item, index) => (
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
@@ -142,7 +146,7 @@ const PlaceOrderScreen = ({ history }) => {
               <ListGroup.Item>
                 <Button
                   type='button'
-                  className='btn-block'
+                  className='btn-block mt-2'
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
                 >

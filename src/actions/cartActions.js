@@ -23,6 +23,7 @@ export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
   const req = {id,qty,auth}
   const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart` ,req ,config)
   if(res.status === 201){
+    localStorage.setItem('cartItems', JSON.stringify(res.data))
     dispatch({
       type:ITEM_ADDED,
     })
@@ -45,7 +46,7 @@ export const removeFromCart = (userId,productId) => async(dispatch, getState) =>
     },
   }
   const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/delete` ,{userId,productId} ,config)
-  // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
 export const saveShippingAddress = (data) => (dispatch) => {
@@ -77,6 +78,7 @@ export const getCartItems = (userId) => async (dispatch) =>{
     type: INIT_CART_ITEM,
     payload: data
   })
+  localStorage.setItem('cartItems', JSON.stringify(data))
 }
 
 export const quantityChange = (userId , productId,value,qty) => async(dispatch) =>{
@@ -95,6 +97,7 @@ export const quantityChange = (userId , productId,value,qty) => async(dispatch) 
   const res = await axios.put('https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/qtyChange',{userId,productId,value,qty},config)
   if(res.status === 201){
     const data = res.data;
+    localStorage.setItem('cartItems', JSON.stringify(data))
     dispatch({
       type:INIT_CART_ITEM,
       payload:data
