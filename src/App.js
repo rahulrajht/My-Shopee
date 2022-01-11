@@ -13,12 +13,13 @@ import PaymentScreen from './screens/PaymentScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer'
+import WishListScreen from './screens/WishListScreen'
 function App() {
     return (
         <>
         <Router>
             <Header />
-            <main className='py-3'>
+            <main className='py-3 mb-6'>
                 
                 <Container>
                     <Route  exact path="/" component={HomeScreen}/>
@@ -31,9 +32,10 @@ function App() {
                     <Route path='/payment' component={PaymentScreen} />
                     <Route path='/placeorder' component={PlaceOrderScreen} />
                     <Route path='/search/:keyword' component={HomeScreen} exact />
+                    <Route path='/wishlist' component={WishListScreen} exact />
                 </Container>
             </main>
-            <Footer/>
+            <Footer />
         </Router>
         
         </>
