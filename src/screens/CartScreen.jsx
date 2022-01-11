@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card, ButtonGroup } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, getCartItems, removeFromCart,quantityChange } from '../actions/cartActions'
+import {getCartItems, removeFromCart,quantityChange } from '../actions/cartActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-const CartScreen = ({ match, location, history }) => {
+const CartScreen = ({history }) => {
 
   const dispatch = useDispatch()
 
