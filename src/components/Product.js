@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Card, Container } from "react-bootstrap";
 import Rating from "./Rating";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, removeFromWishList } from "../actions/wishListAction";
 import { toast } from "react-toastify";
 import { checkItemInWishList } from "../utils/checkItemInWishList";
+
 const Product = ({ product }) => {
   toast.configure();
   const dispatch = useDispatch();
@@ -15,14 +16,15 @@ const Product = ({ product }) => {
   const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
   const userid = userInfo ? userInfo._id : "";
   const wishlist = JSON.parse(localStorage.getItem("wishlist"))
-
-
+  const [color, setcolor] = useState(checkItemInWishList(wishlist,product._id)?"red":"limegreen")
 
   function action(id,userid){
     if(color==="red"){
       dispatch(removeFromWishList(userid,id))
+      setcolor("limegreen")
     }else{
       dispatch(addToWishList(product._id, userid))
+      setcolor("red")
     }
   }
   return (
