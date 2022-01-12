@@ -26,7 +26,6 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
 } from '../constants/userConstants'
-import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 import { getCartItems } from './cartActions';
 import { getWishListItems } from './wishListAction';
 
@@ -67,7 +66,7 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
+  localStorage.clear()
   dispatch({ type: USER_LOGOUT })
   dispatch({ type: USER_DETAILS_RESET })
   dispatch({ type: ORDER_LIST_MY_RESET })
