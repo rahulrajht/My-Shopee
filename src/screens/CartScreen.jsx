@@ -16,8 +16,11 @@ const CartScreen = ({history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const userInfo  = userLogin.userInfo ? userLogin.userInfo : ""
   const userid = userInfo ? userInfo._id : ""
+
   useEffect(() => {
-      dispatch(getCartItems(userid))    
+    if(userid){
+      dispatch(getCartItems(userid))
+    }    
   }, [])
 
   const removeFromCartHandler = (userId,productId) => {

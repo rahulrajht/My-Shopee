@@ -9,7 +9,7 @@ import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 import {  getWishListItems } from '../actions/wishListAction'
-import { checkItemInWishList } from '../utils/checkItemInWishList'
+
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
   const dispatch = useDispatch()
@@ -18,10 +18,11 @@ const HomeScreen = ({ match }) => {
   const { loading, error, products } = productList
   const {userInfo} = useSelector((state) => state.userLogin)
   
-
+  
 
   useEffect(() => {
-    dispatch(listProducts(keyword))
+    
+    dispatch(listProducts(keyword))   
     if(userInfo){
       dispatch(getWishListItems(userInfo._id))
     }

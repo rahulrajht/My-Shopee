@@ -15,7 +15,7 @@ const Product = ({ product }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
   const userid = userInfo ? userInfo._id : "";
-  const wishlist = JSON.parse(localStorage.getItem("wishlist"))
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || []
   const [color, setcolor] = useState(checkItemInWishList(wishlist,product._id)?"red":"limegreen")
 
   function action(id,userid){
