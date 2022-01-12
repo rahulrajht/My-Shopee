@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer'
 import WishListScreen from './screens/WishListScreen'
+
 function App() {
     return (
         <>
