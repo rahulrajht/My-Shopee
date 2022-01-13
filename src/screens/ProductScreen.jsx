@@ -69,6 +69,9 @@ const ProductScreen = ({ history, match }) => {
   
 
   const addToCartHandler = () => {
+    if(userInfo === null){
+      history.push("/login")
+    }
     const pid = match.params.id;
     if(!checkItemInCart(cartItems,pid)){
       dispatch(addToCart(match.params.id, qty, userInfo._id))
