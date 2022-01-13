@@ -38,11 +38,17 @@ const ProfileScreen = ({ location, history }) => {
   }, [dispatch, history, userInfo, user])
 
   const submitHandler = (e) => {
+    setMessage("")
     e.preventDefault()
-    if (password !== confirmPassword) {
+    if(password === '' ){
+      setMessage('Enter the password')
+    }
+
+    else if(password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }))
+
     }
   }
 
