@@ -44,6 +44,11 @@ $danger:        $red;
 $light:         $gray-300;
 $dark:          $gray-900;
 
+.img{
+    object-fit: cover;
+    height: 250px;
+}
+
 .crs{
     display: block;
     height: 450px;

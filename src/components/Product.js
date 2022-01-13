@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, Container } from "react-bootstrap";
+import { Card} from "react-bootstrap";
 import Rating from "./Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -30,9 +30,9 @@ const Product = ({ product }) => {
   return (
     <Card className="my-3 p-3 rounded">
       <Link to={`/product/${product._id}`}>
-        <Card.Img src={product.image} variant="top" />
+        <Card.Img className="img" src={product.image} variant="top" />
       </Link>
-
+    
       <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div">
