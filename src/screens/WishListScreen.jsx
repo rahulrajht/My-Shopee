@@ -24,10 +24,17 @@ const WishListScreen = ({ match, location, history }) => {
 
   return (
     <>
-    <Link to='/' className='btn btn-light'>
+    <Link to='/' className='btn btn-light mb-3'>
           Go Back
     </Link>
         <>
+        {
+          wishListItems.length === 0 ? (
+            <Message >
+            Your wishlist is empty <Link to='/'>Go Back</Link>
+          </Message>
+          ):
+        (
           <Row>
             {wishListItems.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -35,7 +42,9 @@ const WishListScreen = ({ match, location, history }) => {
               </Col>
             ))}
           </Row>
+        )}
         </>
+
     </>
   )
 }
