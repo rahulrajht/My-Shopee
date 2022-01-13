@@ -16,8 +16,9 @@ const Header = () => {
   const { userInfo } = userLogin
 
   const logoutHandler = () => {
+    history.go(0)
     dispatch(logout())
-    history.push("/")
+    
   }
   return (
     <header>
