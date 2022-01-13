@@ -9,6 +9,7 @@ import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 import {  getWishListItems } from '../actions/wishListAction'
+import Filter from '../components/Filter'
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword
@@ -39,13 +40,14 @@ const HomeScreen = ({ match }) => {
           Go Back
         </Link>
       )}
-      <h1 className='mt-5'>Latest Products</h1>
+     
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+        <Filter/>
           <Row>
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
