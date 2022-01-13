@@ -8,7 +8,7 @@ import {
   ITEM_ADDED_REQUEST,
   ITEM_ADDED_SUCESS
 } from '../constants/wishListConstants'
-
+const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
 export const addToWishList = (id, auth) => async (dispatch, getState) => {
   dispatch({
     type: ITEM_ADDED_REQUEST,
@@ -19,7 +19,7 @@ export const addToWishList = (id, auth) => async (dispatch, getState) => {
     },
   }
   const req = {id,auth}
-  const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/wishlist` ,req ,config)
+  const res = await axios.post(`${BACKEND_URL}/api/wishlist` ,req ,config)
   if(res.status === 201){
     dispatch({
       type:ITEM_ADDED,
@@ -42,8 +42,7 @@ export const removeFromWishList = (userId,productId) => async(dispatch, getState
       'Content-Type': 'application/json',
     },
   }
-  const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/wishlist/delete` ,{userId,productId} ,config)
-  // localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  const res = await axios.post(`${BACKEND_URL}/api/wishlist/delete` ,{userId,productId} ,config)
 }
 
 
@@ -53,7 +52,7 @@ export const getWishListItems = (userId) => async (dispatch) =>{
       'Content-Type': 'application/json',
     },
   }
-  const {data} = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/wishlist/getWishlist` ,{userId} ,config)
+  const {data} = await axios.post(`${BACKEND_URL}/api/wishlist/getWishlist` ,{userId} ,config)
   dispatch({
     type: INIT_WISHLIST_ITEM,
     payload: data

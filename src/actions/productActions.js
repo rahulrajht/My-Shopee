@@ -26,7 +26,7 @@ import {
   HIGH_TO_LOW,
   LOW_TO_HIGH,
 } from "../constants/productConstants";
-
+const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
 export const listProducts =
   (keyword = "") =>
   async (dispatch) => {
@@ -39,7 +39,7 @@ export const listProducts =
       dispatch({ type: PRODUCT_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products?keyword=${keyword}`,
+        `${BACKEND_URL}/api/products?keyword=${keyword}`,
         config
       );
       dispatch({
@@ -60,9 +60,7 @@ export const listProducts =
 export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const { data } = await axios.get(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/${id}`
-    );
+    const { data } = await axios.get(`${BACKEND_URL}/api/products/${id}`);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -95,10 +93,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       },
     };
 
-    await axios.delete(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/${id}`,
-      config
-    );
+    await axios.delete(`${BACKEND_URL}/api/products/${id}`, config);
 
     dispatch({
       type: PRODUCT_DELETE_SUCCESS,
@@ -114,80 +109,6 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
   }
 };
 
-export const createProduct = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: PRODUCT_CREATE_REQUEST,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.post(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products`,
-      {},
-      config
-    );
-
-    dispatch({
-      type: PRODUCT_CREATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-
-export const updateProduct = (product) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: PRODUCT_UPDATE_REQUEST,
-    });
-
-    const {
-      userLogin: { userInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
-
-    const { data } = await axios.put(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/${product._id}`,
-      product,
-      config
-    );
-
-    dispatch({
-      type: PRODUCT_UPDATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
 
 export const createProductReview =
   (productId, review) => async (dispatch, getState) => {
@@ -208,7 +129,7 @@ export const createProductReview =
       };
 
       await axios.post(
-        `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/${productId}/reviews`,
+        `${BACKEND_URL}/api/products/${productId}/reviews`,
         review,
         config
       );
@@ -231,9 +152,7 @@ export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
 
-    const { data } = await axios.get(
-      `https://My-Shopee-Backend.rahulgupta99.repl.co/api/products/top`
-    );
+    const { data } = await axios.get(`${BACKEND_URL}/api/products/top`);
 
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
@@ -257,7 +176,7 @@ export const filterProducts = (keyword) => async (dispatch, getState) => {
       type: HIGH_TO_LOW,
       payload: products,
     });
-  }else{
+  } else {
     dispatch({
       type: LOW_TO_HIGH,
       payload: products,

@@ -10,7 +10,7 @@ import {
   ITEM_ADDED_REQUEST,
   ITEM_ADDED_SUCESS
 } from '../constants/cartConstants'
-
+const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
 export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
   dispatch({
     type: ITEM_ADDED_REQUEST,
@@ -21,7 +21,7 @@ export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
     },
   }
   const req = {id,qty,auth}
-  const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart` ,req ,config)
+  const res = await axios.post(`${BACKEND_URL}/api/cart` ,req ,config)
   if(res.status === 201){
     localStorage.setItem('cartItems', JSON.stringify(res.data))
     dispatch({
@@ -45,7 +45,7 @@ export const removeFromCart = (userId,productId) => async(dispatch, getState) =>
       'Content-Type': 'application/json',
     },
   }
-  const res = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/delete` ,{userId,productId} ,config)
+  const res = await axios.post(`${BACKEND_URL}/api/cart/delete` ,{userId,productId} ,config)
    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
@@ -73,7 +73,7 @@ export const getCartItems = (userId) => async (dispatch) =>{
       'Content-Type': 'application/json',
     },
   }
-  const {data} = await axios.post(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/getCart` ,{userId} ,config)
+  const {data} = await axios.post(`${BACKEND_URL}/api/cart/getCart` ,{userId} ,config)
   dispatch({
     type: INIT_CART_ITEM,
     payload: data
@@ -94,7 +94,7 @@ export const quantityChange = (userId , productId,value,qty) => async(dispatch) 
       'Content-Type': 'application/json',
     },
   }
-  const res = await axios.put('https://My-Shopee-Backend.rahulgupta99.repl.co/api/cart/qtyChange',{userId,productId,value,qty},config)
+  const res = await axios.put(`${BACKEND_URL}/api/cart/qtyChange`,{userId,productId,value,qty},config)
   if(res.status === 201){
     const data = res.data;
     localStorage.setItem('cartItems', JSON.stringify(data))

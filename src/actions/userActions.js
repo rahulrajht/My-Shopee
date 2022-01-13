@@ -28,6 +28,7 @@ import {
 } from '../constants/userConstants'
 import { getCartItems } from './cartActions';
 import { getWishListItems } from './wishListAction';
+const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -42,7 +43,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'https://My-Shopee-Backend.rahulgupta99.repl.co/api/users/login',
+      `${BACKEND_URL}/api/users/login`,
       { email, password },
       config
     )
@@ -86,7 +87,7 @@ export const register = (name, email, password) => async (dispatch) => {
     }
 
     const { data } = await axios.post(
-      'https://My-Shopee-Backend.rahulgupta99.repl.co/api/users',
+      `${BACKEND_URL}/api/users`,
       { name, email, password },
       config
     )
@@ -129,7 +130,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/users/${id}`, config)
+    const { data } = await axios.get(`${BACKEND_URL}/api/users/${id}`, config)
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -163,7 +164,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/users/profile`, user, config)
+    const { data } = await axios.put(`${BACKEND_URL}/api/users/profile`, user, config)
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
@@ -172,102 +173,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const listUsers = () => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_LIST_REQUEST,
-    })
-
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    const { data } = await axios.get(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/users`, config)
-
-    dispatch({
-      type: USER_LIST_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: USER_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const deleteUser = (id) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_DELETE_REQUEST,
-    })
-
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    await axios.delete(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/users/${id}`, config)
-
-    dispatch({ type: USER_DELETE_SUCCESS })
-  } catch (error) {
-    dispatch({
-      type: USER_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-export const updateUser = (user) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: USER_UPDATE_REQUEST,
-    })
-
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    const { data } = await axios.put(`https://My-Shopee-Backend.rahulgupta99.repl.co/api/users/${user._id}`, user, config)
-
-    dispatch({ type: USER_UPDATE_SUCCESS })
-
-    dispatch({ type: USER_DETAILS_SUCCESS, payload: data })
-  } catch (error) {
-    dispatch({
-      type: USER_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
