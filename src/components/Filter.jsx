@@ -22,7 +22,7 @@ function Filter() {
                   onChange={() => dispatch(filterProducts(1))}
                 ></Form.Check>
               </Form.Label>
-              <Form.Label className="mx-2"> High to Low </Form.Label>
+              <Form.Label className="mx-2"> Low to High </Form.Label>
                 <Form.Check
                   className="mx-2 d-inline-block align-center"
                   type="radio"
