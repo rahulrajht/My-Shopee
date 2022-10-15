@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 const Rating = ({ value, text, color }) => {
   return (
-    <>
+    <div style={{display:"flex",justifyContent:"space-between" , alignItems:"center"}}>
       <ReactStars
         count={value}
         edit={false}
@@ -22,7 +22,7 @@ const Rating = ({ value, text, color }) => {
       <div className="rating">
         <span>{text && text}</span>
       </div>
-    </>
+    </div >
   );
 };
 
