@@ -58,10 +58,10 @@ const LoginScreen = ({  history,location }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button  className='mt-3 px-4' type='submit' variant='primary'>
+        <Button  className='mt-3 px-4' type='submit' variant='outline-primary'>
           Sign In
         </Button>
-        <Button onClick={submitGuestLogin } className='mt-3 ms-3 px-4' variant='primary'>
+        <Button onClick={submitGuestLogin } className='mt-3 ms-3 px-4' variant='outline-primary'>
           Login as Guest 
         </Button>
       </Form>
