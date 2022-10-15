@@ -15,16 +15,23 @@ const Product = ({ product }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
   const userid = userInfo ? userInfo._id : "";
-  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || []
-  const [color, setcolor] = useState(checkItemInWishList(wishlist,product._id)?"red":"limegreen")
+  const {wishListItems} = useSelector((state) => state.wishList)
+  const isInWishList = checkItemInWishList(wishListItems,product._id) ? "red" :"limegreen"
+  const [color, setcolor] = useState(isInWishList)
 
   function action(id,userid){
+    if (userid === null || userid === "" || userid === undefined){
+      toast.warning("You're not logged in please Login!")
+      return
+    }
     if(color==="red"){
       dispatch(removeFromWishList(userid,id))
       setcolor("limegreen")
+      toast.success("Item removed sucessfully!")
     }else{
       dispatch(addToWishList(product._id, userid))
       setcolor("red")
+      toast.success("Item added sucessfully!")
     }
   }
   return (

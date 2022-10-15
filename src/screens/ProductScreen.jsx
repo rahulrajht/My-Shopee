@@ -70,7 +70,8 @@ const ProductScreen = ({ history, match }) => {
 
   const addToCartHandler = () => {
     if(userInfo === null){
-      history.push("/login")
+      toast.warning("You're not logged in please Login!")
+      // history.push("/login")
     }
     const pid = match.params.id;
     if(!checkItemInCart(cartItems,pid)){

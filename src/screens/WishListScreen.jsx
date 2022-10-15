@@ -11,11 +11,9 @@ const WishListScreen = ({ match, location, history }) => {
   const dispatch = useDispatch()
 
   const {wishListItems} = useSelector((state) => state.wishList)
-  console.log(wishListItems)
   const userLogin = useSelector((state) => state.userLogin)
   const userInfo  = userLogin.userInfo ? userLogin.userInfo : ""
   const userid = userInfo ? userInfo._id : ""
-
   useEffect(() => {
       dispatch(getWishListItems(userid))    
   }, [])

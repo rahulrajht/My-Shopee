@@ -20,9 +20,14 @@ export const addToWishList = (id, auth) => async (dispatch, getState) => {
   }
   const req = {id,auth}
   const res = await axios.post(`${BACKEND_URL}/api/wishlist` ,req ,config)
+ 
   if(res.status === 201){
     dispatch({
       type:ITEM_ADDED,
+    })
+    dispatch({
+      type:INIT_WISHLIST_ITEM,
+      payload:res.data
     })
   }
 
@@ -57,5 +62,4 @@ export const getWishListItems = (userId) => async (dispatch) =>{
     type: INIT_WISHLIST_ITEM,
     payload: data
   })
-  localStorage.setItem('wishlist',JSON.stringify(data))
 }
