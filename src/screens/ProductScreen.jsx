@@ -40,7 +40,7 @@ const ProductScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (successProductReview) {
-      alert('Review Submitted!')
+      toast.success('Review Submitted!')
       setRating(0)
       setComment('')
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
@@ -146,7 +146,7 @@ const ProductScreen = ({ history, match }) => {
                     </Row>
                   </ListGroup.Item>
 
-                  {product.countInStock > 0 && (
+                  {/* {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
                         <Col>Qty</Col>
@@ -167,13 +167,14 @@ const ProductScreen = ({ history, match }) => {
                         </Col>
                       </Row>
                     </ListGroup.Item>
-                  )}
+                  )} */}
 
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
                       className='btn-block'
                       type='button'
+                      variant = 'outline-primary'
                       disabled={product.countInStock === 0}
                     >
                       Add To Cart
@@ -227,7 +228,7 @@ const ProductScreen = ({ history, match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type='submit' variant='primary'>
+                      <Button type='submit' variant='primary' className= "mt-3" >
                         Submit
                       </Button>
                     </Form>
