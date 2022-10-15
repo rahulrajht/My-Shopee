@@ -75,7 +75,6 @@ export const getCartItems = (userId) => async (dispatch) =>{
     },
   }
   const {data} = await axios.post(`${BACKEND_URL}/api/cart/getCart` ,{userId} ,config)
-  console.log(data,"fromc")
   dispatch({
     type: INIT_CART_ITEM,
     payload: data
