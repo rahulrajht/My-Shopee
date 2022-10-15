@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { login } from '../actions/userActions'
+import { login ,loginAsGuest} from '../actions/userActions'
 
 const LoginScreen = ({  history,location }) => {
   const [email, setEmail] = useState('')
@@ -25,6 +25,11 @@ const LoginScreen = ({  history,location }) => {
     dispatch(login(email, password))
   }
 
+  const submitGuestLogin = ()=>{
+    setEmail("guest@gmail.com")
+    setPassword("123456")
+    dispatch(loginAsGuest())
+  }
   return (
     <FormContainer>
       <h1 className='mt-5'>Sign In</h1>
@@ -55,6 +60,9 @@ const LoginScreen = ({  history,location }) => {
 
         <Button  className='mt-3 px-4' type='submit' variant='primary'>
           Sign In
+        </Button>
+        <Button onClick={submitGuestLogin } className='mt-3 ms-3 px-4' variant='primary'>
+          Login as Guest 
         </Button>
       </Form>
 
