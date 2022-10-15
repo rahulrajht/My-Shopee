@@ -79,8 +79,8 @@ const Product = ({ product }) => {
         </Card.Text>
         <div style={{display:"flex",justifyContent:"space-between" , alignItems:"center"}}>
         <Card.Text as="h5">${product.price}</Card.Text>
-        <Button onClick={addToCartHandler} variant="outline" disabled={isSpin}>
-        <FontAwesomeIcon   cursor={"pointer"} size="lg" icon={faShoppingCart} spin={isSpin} />
+        <Button onClick={addToCartHandler}  className="primary" disabled={isSpin}>
+        <FontAwesomeIcon   cursor={"pointer"} size="lg" color="white" icon={faShoppingCart} spin={isSpin} />
         </Button>
         </div>
         <div

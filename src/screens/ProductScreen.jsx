@@ -172,7 +172,7 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroup.Item>
                     <Button
                       onClick={addToCartHandler}
-                      className='btn-block'
+                      className='btn-block '
                       type='button'
                       variant = 'outline-primary'
                       disabled={product.countInStock === 0}
@@ -228,7 +228,7 @@ const ProductScreen = ({ history, match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type='submit' variant='primary' className= "mt-3" >
+                      <Button type='submit' variant='outline-primary' className= "mt-3" >
                         Submit
                       </Button>
                     </Form>
