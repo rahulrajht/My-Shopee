@@ -14,6 +14,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen'
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/Footer'
 import WishListScreen from './screens/WishListScreen'
+import OrderScreen from './screens/OrderScreen'
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                     <Route path='/placeorder' component={PlaceOrderScreen} />
                     <Route path='/search/:keyword' component={HomeScreen} exact />
                     <Route path='/wishlist' component={WishListScreen} exact />
+                    <Route path='/order/:id' component={OrderScreen} />
                 </Container>
             </main>
             <Footer />

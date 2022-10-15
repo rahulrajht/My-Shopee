@@ -4,14 +4,16 @@ import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
-
+import { createOrder } from '../actions/orderActions'
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
-
+  
   const cart = useSelector((state) => state.cart) 
   const cartItems = cart.cartItems === [] ? JSON.parse(localStorage.getItem('cartItems')): cart.cartItems
   const userInfo = localStorage.getItem('userInfo') || ""
-
+  
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
@@ -28,11 +30,30 @@ const PlaceOrderScreen = ({ history }) => {
   ).toFixed(2)
 
   useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+    // eslint-disable-next-line
+  }, [history, success])
+  useEffect(() => {
     if(cart.paymentMethod === undefined){
       history.push('/payment')
     }
   }, [history])
-
+  const placeOrderHandler = () => {
+    console.log("clicked from placeorder")
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    )
+  }
 
   return (
     <>
@@ -127,6 +148,8 @@ const PlaceOrderScreen = ({ history }) => {
                   type='button'
                   className='btn-block mt-2'
                   disabled={cart.cartItems === 0}
+                  variant='outline-primary'
+                  onClick={placeOrderHandler}
                 >
                   Place Order
                 </Button>
