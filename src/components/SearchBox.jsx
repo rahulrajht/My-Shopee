@@ -21,7 +21,7 @@ const SearchBox = ({ history }) => {
         placeholder='Search Products...'
         className='mr-sm-2 ml-sm-5 flex'
       ></Form.Control>
-      <Button type='submit' variant='outline-primary' className='p-2 ms-1'>
+      <Button type='submit' variant='outline-success' className='p-2 ms-1'>
         Search
       </Button>
     </Form>
