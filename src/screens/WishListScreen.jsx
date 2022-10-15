@@ -29,7 +29,7 @@ const WishListScreen = ({ match, location, history }) => {
         {
           wishListItems.length === 0 ? (
             <Message >
-            Your wishlist is empty <Link to='/'>Go Back</Link>
+            Your wishlist is empty
           </Message>
           ):
         (
