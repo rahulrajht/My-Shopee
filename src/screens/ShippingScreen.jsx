@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { saveShippingAddress } from '../actions/cartActions'
+import { useEffect } from 'react'
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart)
@@ -13,7 +14,7 @@ const ShippingScreen = ({ history }) => {
   const [city, setCity] = useState(shippingAddress.city)
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
   const [country, setCountry] = useState(shippingAddress.country)
-
+  const [isDummyAdress , setDummyAdress] = useState(false)
   const dispatch = useDispatch()
 
   const submitHandler = (e) => {
@@ -21,7 +22,19 @@ const ShippingScreen = ({ history }) => {
     dispatch(saveShippingAddress({ address, city, postalCode, country }))
     history.push('/payment')
   }
-
+  const addressHandler = ()=>{
+    setAddress("H.N 257, Pattandur Agrahara, Whitefield, Karnataka")
+    setCity("Bangalore")
+    setPostalCode("560066")
+    setCountry("India")
+    setDummyAdress(true)
+  }
+  useEffect(()=>{
+    if(isDummyAdress){
+      dispatch(saveShippingAddress({ address, city, postalCode, country }))
+    history.push('/payment')
+    }
+  },[isDummyAdress])
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
@@ -73,6 +86,9 @@ const ShippingScreen = ({ history }) => {
 
         <Button className='mt-2' type='submit' variant='outline-primary'>
           Continue
+        </Button>
+        <Button className='mt-2 ms-2' onClick={addressHandler} variant='outline-primary'>
+          Proceed with dummy address
         </Button>
       </Form>
     </FormContainer>
