@@ -22,8 +22,16 @@ const Header = () => {
     <header>
       <Navbar className="custom-bg" variant="dark" expand="lg" collapseOnSelect>
         <Container className="p-2">
-          <LinkContainer to="/">
-            <Navbar.Brand>My Shopee</Navbar.Brand>
+          <LinkContainer style={{color:"black",display:"flex", alignItems:"center"}} to="/">
+            <Navbar.Brand >
+            <img
+              alt=""
+              src="https://bit.ly/3yKD13g"
+              width="70"
+              height="50"
+              className="d-inline-block align-top me-3"
+            />{' '}
+              My Bucket</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -32,20 +40,20 @@ const Header = () => {
             id="basic-navbar-nav"
           >
             <Route render={({ history }) => <SearchBox history={history} />} />
-            <Nav>
+            <Nav >
               <LinkContainer to="/cart" className="ml-5">
                 <Nav.Link>
-                  <FontAwesomeIcon icon={faShoppingCart} size="2x" />
+                  <FontAwesomeIcon color="white" icon={faShoppingCart} size="2x" />
                 </Nav.Link>
               </LinkContainer>
 
               <LinkContainer to="/wishlist" className="ml-5">
                 <Nav.Link>
-                  <FontAwesomeIcon icon={faHeart} size="2x" />
+                  <FontAwesomeIcon color="white" icon={faHeart} size="2x" />
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
-                <NavDropdown title={userInfo.name} id="username">
+                <NavDropdown   title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

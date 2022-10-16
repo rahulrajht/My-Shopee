@@ -6,7 +6,7 @@ import { filterProducts } from "../actions/productActions";
 function Filter() {
   const dispatch = useDispatch();
   return (
-    <Container className="my-3 w-50 d-flex">
+    <Container className="my-3 filter">
       <h5 className="mx-2">Sort By</h5>
       <Form className="mt-1 ms-2">
         <Form.Group>

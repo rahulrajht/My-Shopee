@@ -88,9 +88,7 @@ const CartScreen = ({ history }) => {
                         {" "}
                         +{" "}
                       </Button>
-                    </ButtonGroup>
-                  </Col>
-                  <Col md={2}>
+                      <Col md={2}>
                     <Button
                       type="button"
                       variant="light"
@@ -99,6 +97,9 @@ const CartScreen = ({ history }) => {
                       <FontAwesomeIcon icon={faTrash} />
                     </Button>
                   </Col>
+                    </ButtonGroup>
+                  </Col>
+                  
                 </Row>
               </ListGroup.Item>
             ))}
