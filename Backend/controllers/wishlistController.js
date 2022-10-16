@@ -8,7 +8,6 @@ var ObjectID = require('mongodb').ObjectID;
 const addToWishList = asyncHandler(async (req, res) => {
   const{ id,auth} = req.body;
   var product = await Product.findOne({_id:id});
-  console.log("KKKKK",product)
   try{
     const wishlist = await User.findOneAndUpdate({_id:auth},{
       $addToSet:{wishlists:product }

@@ -38,7 +38,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.post(`${BACKEND_URL}/api/orders`, order, config)
-    console.log("data from irder" , data)
+    
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data,
@@ -71,7 +71,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get(`${BACKEND_URL}/api/orders/${id}`, config)
-
+    
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
@@ -87,10 +87,11 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const payOrder = (orderId, paymentResult) => async (
+export const payOrder = (orderId) => async (
   dispatch,
   getState
 ) => {
+
   try {
     dispatch({
       type: ORDER_PAY_REQUEST,
@@ -108,10 +109,8 @@ export const payOrder = (orderId, paymentResult) => async (
     }
 
     const { data } = await axios.put(`${BACKEND_URL}/api/orders/${orderId}/pay`,
-      paymentResult,
       config
     )
-
     dispatch({
       type: ORDER_PAY_SUCCESS,
       payload: data,

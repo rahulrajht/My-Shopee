@@ -40,11 +40,9 @@ const addToCart = asyncHandler(async (req, res) => {
 
 
 const getCartItems = asyncHandler(async (req,res)=>{
-  const {userId} = req.body 
-  console.log(userId)
+  const {userId} = req.body
   try{
     const product = await User.findById({_id:userId});
-    console.log(product)
     res.status(200).json(product.cart)
   }catch(e){
     res.json({success: false, response: error.message});
@@ -58,7 +56,6 @@ const changeQuantity = asyncHandler(async (req,res)=>{
   const value = parseInt(req.body.value)
   const qty = parseInt(req.body.qty)
   if(qty ===1 && value === -1){
-    console.log("her")
      try{
       await User.findOneAndUpdate(
         {_id:userId,'cart._id':productId},
