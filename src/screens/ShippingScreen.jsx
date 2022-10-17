@@ -3,13 +3,15 @@ import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
-import { saveShippingAddress } from '../actions/cartActions'
+import { getCartItems, saveShippingAddress } from '../actions/cartActions'
 import { useEffect } from 'react'
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
-
+  const userLogin = useSelector((state) => state.userLogin);
+  const userInfo = userLogin.userInfo ? userLogin.userInfo : "";
+  const userid = userInfo ? userInfo._id : "";
   const [address, setAddress] = useState(shippingAddress.address)
   const [city, setCity] = useState(shippingAddress.city)
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
@@ -17,6 +19,7 @@ const ShippingScreen = ({ history }) => {
   const [isDummyAdress , setDummyAdress] = useState(false)
   const dispatch = useDispatch()
 
+  
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(saveShippingAddress({ address, city, postalCode, country }))
@@ -35,6 +38,11 @@ const ShippingScreen = ({ history }) => {
     history.push('/payment')
     }
   },[isDummyAdress])
+  useEffect(()=>{
+    if (userid) {
+      dispatch(getCartItems(userid));
+    }
+  },[])
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
