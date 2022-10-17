@@ -71,7 +71,7 @@ const ProductScreen = ({ history, match }) => {
   const addToCartHandler = () => {
     if(userInfo === null){
       toast.warning("You're not logged in please Login!")
-      // history.push("/login")
+      return
     }
     const pid = match.params.id;
     if(!checkItemInCart(cartItems,pid)){

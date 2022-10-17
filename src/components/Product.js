@@ -37,8 +37,9 @@ const Product = ({ product }) => {
     }
   }
   const addToCartHandler = () => {
-    if(userInfo === null){
+    if(userInfo === null || userInfo === ""){
       toast.warning("You're not logged in please Login!")
+      return
     }
     if(!checkItemInCart(cartItems,product._id)){
       dispatch(addToCart(product._id, 1 , userid))
