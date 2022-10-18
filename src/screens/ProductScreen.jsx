@@ -119,7 +119,7 @@ const ProductScreen = ({ history, match }) => {
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>Price: ₹{product.price}</ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>
@@ -132,7 +132,7 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>₹{product.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -145,29 +145,6 @@ const ProductScreen = ({ history, match }) => {
                       </Col>
                     </Row>
                   </ListGroup.Item>
-
-                  {/* {product.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Control
-                            as='select'
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )} */}
 
                   <ListGroup.Item>
                     <Button
