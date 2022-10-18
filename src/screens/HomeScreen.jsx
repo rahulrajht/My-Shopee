@@ -47,6 +47,10 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
+        {
+          !products.length ? (
+          <h5 className='mt-3'><Message variant='info'>{"No product found"}</Message></h5>
+          ) : (<>     
         <Filter/>
           <Row>
             {products.map((product) => (
@@ -55,6 +59,9 @@ const HomeScreen = ({ match }) => {
               </Col>
             ))}
           </Row>
+          </>
+          )
+          }
         </>
       )}
     </>
