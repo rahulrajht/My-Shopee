@@ -65,7 +65,7 @@ export const login = (email, password) => async (dispatch) => {
     })
   }
 }
-export const loginAsGuest =()=> async(dispatch) =>{
+export const loginAsGuest =(email, password)=> async(dispatch) =>{
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
@@ -79,7 +79,7 @@ export const loginAsGuest =()=> async(dispatch) =>{
 
     const { data } = await axios.post(
       `${BACKEND_URL}/api/users/login`,
-      { email:"guest@gmail.com", password:"123456" },
+      { email, password },
       config
     )
     dispatch({
