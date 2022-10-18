@@ -28,7 +28,7 @@ const LoginScreen = ({  history,location }) => {
   const submitGuestLogin = ()=>{
     setEmail("guest@gmail.com")
     setPassword("123456789")
-    dispatch(loginAsGuest(email,password))
+    dispatch(loginAsGuest())
   }
   return (
     <FormContainer>
