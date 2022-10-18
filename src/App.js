@@ -21,7 +21,7 @@ function App() {
         <>
         <Router>
             <Header />
-            <main className='py-3 mb-6'>
+            <main className='py-3 mb-6 mt-7'>
                 
                 <Container>
                     <Route  exact path="/" component={HomeScreen}/>
