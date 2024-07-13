@@ -26,7 +26,7 @@ import {
   HIGH_TO_LOW,
   LOW_TO_HIGH,
 } from "../constants/productConstants";
-const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
+const BACKEND_URL = process.env.REACT_APP_API_KEY;
 export const listProducts =
   (keyword = "") =>
   async (dispatch) => {

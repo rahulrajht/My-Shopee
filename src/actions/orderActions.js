@@ -19,7 +19,7 @@ import {
   ORDER_DELIVER_SUCCESS,
   ORDER_DELIVER_REQUEST,
 } from '../constants/orderConstants'
-const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
+const BACKEND_URL = process.env.REACT_APP_API_KEY;
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({

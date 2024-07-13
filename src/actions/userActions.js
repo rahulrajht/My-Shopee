@@ -28,7 +28,7 @@ import {
 } from '../constants/userConstants'
 import { getCartItems } from './cartActions';
 import { getWishListItems } from './wishListAction';
-const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
+const BACKEND_URL = process.env.REACT_APP_API_KEY;
 
 export const login = (email, password) => async (dispatch) => {
   try {

@@ -10,7 +10,9 @@ import {
   ITEM_ADDED_REQUEST,
   ITEM_ADDED_SUCESS
 } from '../constants/cartConstants'
-const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
+
+const BACKEND_URL = process.env.REACT_APP_API_KEY;
+
 export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
   dispatch({
     type: ITEM_ADDED_REQUEST,

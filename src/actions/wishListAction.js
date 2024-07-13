@@ -8,7 +8,7 @@ import {
   ITEM_ADDED_REQUEST,
   ITEM_ADDED_SUCESS
 } from '../constants/wishListConstants'
-const BACKEND_URL = 'https://My-Shopee-Backend.rahulgupta99.repl.co';
+const BACKEND_URL = process.env.REACT_APP_API_KEY;
 export const addToWishList = (id, auth) => async (dispatch, getState) => {
   dispatch({
     type: ITEM_ADDED_REQUEST,
