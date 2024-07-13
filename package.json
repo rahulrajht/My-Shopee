@@ -26,7 +26,6 @@
     "@babel/preset-react": "^7.16.5",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
-    "dotenv-webpack": "^8.1.0",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^7.0.1",
     "sass-loader": "^12.4.0",

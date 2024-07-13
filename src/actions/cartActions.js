@@ -11,7 +11,7 @@ import {
   ITEM_ADDED_SUCESS
 } from '../constants/cartConstants'
 
-const BACKEND_URL = process.env.REACT_APP_API_KEY;
+const BACKEND_URL = 'https://7b37af4f-20ec-4e30-a996-523a26481b19-00-1mmmp7ap5soe4.kirk.replit.dev';
 
 export const addToCart = (id, qty , auth) => async (dispatch, getState) => {
   dispatch({

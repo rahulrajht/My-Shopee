@@ -26,7 +26,7 @@ import {
   HIGH_TO_LOW,
   LOW_TO_HIGH,
 } from "../constants/productConstants";
-const BACKEND_URL = process.env.REACT_APP_API_KEY;
+const BACKEND_URL = 'https://7b37af4f-20ec-4e30-a996-523a26481b19-00-1mmmp7ap5soe4.kirk.replit.dev';
 export const listProducts =
   (keyword = "") =>
   async (dispatch) => {
