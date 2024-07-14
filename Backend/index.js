@@ -22,8 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const corsOptions ={
-  origin: "https://mybucket.netlify.app/",
-  methods: "GET,POST",
+  origin: "https://mybucket.netlify.app",
   optionsSuccessStatus: 200,
 }
 
