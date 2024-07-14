@@ -4,7 +4,6 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const morgan = require('morgan')
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js')
-const connectDB = require('./config/db.js')
 
 const productRoutes = require('./routes/productRoutes.js')
 const userRoutes = require('./routes/userRoutes.js')
@@ -18,7 +17,7 @@ require('./config/db')
 
 const app = express()
 
-if (process.env['NODE_ENV'] === 'development') {
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
@@ -38,14 +37,14 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/cart',cartRoutes)
 app.use('/api/wishlist',wishlistRoutes)
 
-const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+const myDirectory = path.resolve()
+app.use('/uploads', express.static(path.join(myDirectory, '/uploads')))
 
-if (process.env['NODE_ENV'] === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/build')))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(myDirectory, '/frontend/build')))
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+    res.sendFile(path.resolve(myDirectory, 'frontend', 'build', 'index.html'))
   )
 } else {
   app.get('/', (req, res) => {
@@ -56,7 +55,7 @@ if (process.env['NODE_ENV'] === 'production') {
 app.use(notFound)
 app.use(errorHandler)
 
-const PORT = process.env['PORT'] || 5000
+const PORT = process.env.PORT || 5000
 
 app.listen(
   PORT,
