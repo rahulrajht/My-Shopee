@@ -35,10 +35,10 @@ const myDirectory = path.resolve()
 app.use('/uploads', express.static(path.join(myDirectory, '/uploads')))
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(myDirectory, '/frontend/build')))
+  app.use(express.static(path.join(myDirectory, '../dist')))
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(myDirectory, 'frontend', 'build', 'index.html'))
+    res.sendFile(path.resolve(myDirectory, '../', 'dist', 'index.html'))
   )
 } else {
   app.get('/', (req, res) => {
