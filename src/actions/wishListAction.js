@@ -8,7 +8,7 @@ import {
   ITEM_ADDED_REQUEST,
   ITEM_ADDED_SUCESS
 } from '../constants/wishListConstants'
-const BACKEND_URL = 'https://7b37af4f-20ec-4e30-a996-523a26481b19-00-1mmmp7ap5soe4.kirk.replit.dev';
+const BACKEND_URL = 'https://my-shopee-blond.vercel.app';
 export const addToWishList = (id, auth) => async (dispatch, getState) => {
   dispatch({
     type: ITEM_ADDED_REQUEST,
