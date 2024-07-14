@@ -21,13 +21,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
-const corsOptions ={
-  origin: "https://mybucket.netlify.app",
-  optionsSuccessStatus: 200,
-}
-
 app.use(express.json())
-app.use(cors(corsOptions))
+app.use(cors())
 
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
