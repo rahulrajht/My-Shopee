@@ -1,7 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const Product = require('../models/productModel.js')
 const User = require('../models/userModel.js')
-var ObjectID = require('mongodb').ObjectID;
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 
 
@@ -37,8 +38,8 @@ const getWishListItems = asyncHandler(async (req,res)=>{
 
 
 const deleteWishListItem = asyncHandler(async (req,res) =>{
-  const userId = ObjectID(req.body.userId);
-  const productId = ObjectID(req.body.productId)
+  const userId = new ObjectId(req.body.userId);
+  const productId = new ObjectId(req.body.productId)
   try{
       const items = await User.findOneAndUpdate(
         {_id:userId,'wishlists._id':productId},
