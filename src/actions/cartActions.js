@@ -96,8 +96,8 @@ export const quantityChange = (userId , productId,value,qty) => async(dispatch) 
       'Content-Type': 'application/json',
     },
   }
-  const res = await axios.put(`${BACKEND_URL}/api/cart/qtyChange`,{userId,productId,value,qty},config)
-  if(res.status === 201){
+  const res = await axios.put(`${BACKEND_URL}/api/cart/qtyChange`,{userId,productId,value,qty},config);
+  if(res.status === 200){
     const data = res.data;
     dispatch({
       type:INIT_CART_ITEM,
